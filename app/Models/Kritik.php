@@ -11,10 +11,27 @@ class Kritik extends Model
 
     protected $table = 'kritiks';
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'comment',
         'rating',
         'film_id',
         'user_id',
     ];
+
+    /**
+     * Relasi ke User yang menulis kritik/komentar.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Relasi ke Film yang dikomentari.
+     */
+    public function film()
+    {
+        return $this->belongsTo(Film::class, 'film_id');
+    }
 }

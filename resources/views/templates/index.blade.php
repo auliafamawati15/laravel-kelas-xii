@@ -20,6 +20,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- nav -->
 @include('templates.component.navbar')
 <!-- //nav -->
+
+{{-- Notifikasi Flash Message (Sukses / Gagal) --}}
+<div class="container" style="margin-top: 15px; margin-bottom: 5px;">
+  @if(session('success'))
+    <div class="alert alert-success alert-dismissible" role="alert" style="border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <i class="fa fa-check-circle"></i> {{ session('success') }}
+    </div>
+  @endif
+
+  @if(session('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert" style="border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <i class="fa fa-exclamation-triangle"></i> {{ session('error') }}
+    </div>
+  @endif
+</div>
+
 <div class="general_social_icons">
 	<nav class="social">
 		<ul>

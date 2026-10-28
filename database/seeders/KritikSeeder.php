@@ -18,14 +18,21 @@ class KritikSeeder extends Seeder
         //
         // Kritik::create(1000)->create();
 
+        $userIds = \App\Models\User::pluck('id')->toArray();
+        $filmIds = \App\Models\Film::pluck('id')->toArray();
+
+        if (empty($userIds) || empty($filmIds)) {
+            return;
+        }
+
         $faker = Faker::create('id_ID');
         for($loop = 1; $loop <= 1000; $loop++)
         {
             Kritik::create([
-                'comment'   => $faker->text($maxNbChars = 200),
-                'rating'    => $faker->numberBetween(1,5),
-                'film_id'   => $faker->numberBetween(1,128),
-                'user_id'   => $faker->numberBetween(1,10),
+                'comment'   => $faker->text(200),
+                'rating'    => $faker->numberBetween(1, 5),
+                'film_id'   => $faker->randomElement($filmIds),
+                'user_id'   => $faker->randomElement($userIds),
             ]);
         }
     }

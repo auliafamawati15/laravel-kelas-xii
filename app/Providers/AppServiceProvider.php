@@ -23,11 +23,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        if(Schema::hasTable('genres'))
-        {
-            view()->share('genres', Genre::all());
-            Paginator::useBootstrap();
+        Paginator::useBootstrap();
+
+        try {
+            if (Schema::hasTable('genres')) {
+                view()->share('genres', Genre::all());
+            }
+        } catch (\Throwable $e) {
+            // Abaikan error koneksi database saat CLI/migration belum jalan
         }
     }
 }
